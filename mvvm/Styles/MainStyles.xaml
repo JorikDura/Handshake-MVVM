@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="TextBox">
+        <Setter Property="Foreground" Value="DarkGray" />
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="Background" Value="#FF1B1B1B" />
+    </Style>
+    <Style TargetType="PasswordBox">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="Background" Value="#FF1B1B1B" />
+    </Style>
+    <Style TargetType="TextBlock">
+        <Setter Property="Foreground" Value="White" />
+    </Style>
+    <Style TargetType="ListView">
+        <Setter Property="Background" Value="#FF1B1B1B" />
+    </Style>
+    <Style TargetType="GridViewColumnHeader">
+        <Setter Property="Background" Value="#FF1B1B1B" />
+    </Style>
+    <SolidColorBrush x:Key="color0" Color="#ade8f4" />
+    <SolidColorBrush x:Key="color1" Color="#90e0ef" />
+    <SolidColorBrush x:Key="color2" Color="#ffd166" />
+    <SolidColorBrush x:Key="color3" Color="#ffccd5" />
+    <SolidColorBrush x:Key="color4" Color="#0077b6" />
+    <SolidColorBrush x:Key="color5" Color="#023e8a" />
+</ResourceDictionary>

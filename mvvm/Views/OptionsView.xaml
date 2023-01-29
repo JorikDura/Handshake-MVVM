@@ -1,0 +1,283 @@
+﻿<UserControl
+    x:Class="mvvm.Views.OptionsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:components="clr-namespace:mvvm.Components"
+    xmlns:customcontrols="clr-namespace:mvvm.CustomControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:mvvm.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+
+    <StackPanel
+        Width="500"
+        Margin="0,25,0,25"
+        Orientation="Vertical">
+        <TextBlock
+            HorizontalAlignment="Center"
+            FontSize="24"
+            FontWeight="Medium"
+            Text="Хендшейк" />
+        <TextBlock
+            Margin="0,5,0,0"
+            HorizontalAlignment="Center"
+            FontSize="12"
+            FontWeight="Medium"
+            Foreground="{StaticResource color0}"
+            Text="Работа для плебеев!"
+            TextWrapping="Wrap" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="10,10,0,0"
+                HorizontalAlignment="Left"
+                FontSize="12"
+                FontWeight="Medium"
+                Text="Данные учетной записи:" />
+            <StackPanel
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="10,10,0,0"
+                Orientation="Horizontal">
+                <TextBlock Text="Логин: " />
+                <TextBlock
+                    HorizontalAlignment="Left"
+                    FontSize="12"
+                    FontWeight="Medium"
+                    Text="{Binding Username}" />
+            </StackPanel>
+            <StackPanel
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="10,10,0,0"
+                Orientation="Horizontal">
+                <TextBlock Text="Имя: " />
+                <TextBlock
+                    HorizontalAlignment="Left"
+                    FontSize="12"
+                    FontWeight="Medium"
+                    Text="{Binding Name}" />
+            </StackPanel>
+            <StackPanel
+                Grid.Row="3"
+                Grid.Column="0"
+                Margin="10,10,0,0"
+                Orientation="Horizontal">
+                <TextBlock Text="Фамилия: " />
+                <TextBlock
+                    HorizontalAlignment="Left"
+                    FontSize="12"
+                    FontWeight="Medium"
+                    Text="{Binding LastName}" />
+            </StackPanel>
+            <StackPanel
+                Grid.Row="4"
+                Grid.Column="0"
+                Margin="10,10,0,0"
+                Orientation="Horizontal">
+                <TextBlock Text="Номер телефона: " />
+                <TextBlock
+                    HorizontalAlignment="Left"
+                    FontSize="12"
+                    FontWeight="Medium"
+                    Text="{Binding Phone}" />
+            </StackPanel>
+            <TextBlock
+                Grid.Row="5"
+                Grid.Column="0"
+                Margin="10,20,0,0"
+                Cursor="Hand"
+                FontSize="12"
+                FontWeight="Medium"
+                Foreground="{StaticResource color0}"
+                Text="Сменить пароль">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding WantResetPasswordCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+            </TextBlock>
+            <TextBlock
+                Grid.Row="6"
+                Grid.Column="0"
+                Margin="10,20,0,0"
+                FontSize="12"
+                FontWeight="Medium"
+                Text="Новый пароль"
+                Visibility="{Binding IsPasswordReset, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <customcontrols:BindablePasswordBox
+                Grid.Row="7"
+                Grid.Column="0"
+                Margin="10,5,0,0"
+                Password="{Binding NewPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Visibility="{Binding IsPasswordReset, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <StackPanel
+                Grid.Row="8"
+                Grid.Column="0"
+                Orientation="Horizontal"
+                Visibility="{Binding IsPasswordReset, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="125" />
+                        <ColumnDefinition Width="125" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="10,5,0,0"
+                        FontSize="12"
+                        Foreground="{StaticResource color0}"
+                        Text="{Binding PasswordStatus}" />
+                    <Button
+                        x:Name="btnLogin"
+                        Grid.Column="1"
+                        Margin="0,10,0,0"
+                        HorizontalAlignment="Right"
+                        Command="{Binding PasswordResetCommand}"
+                        Content="Сменить"
+                        Cursor="Hand"
+                        FontSize="10">
+
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#0077b6" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#023e8a" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border
+                                    Width="100"
+                                    Height="25"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="10">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+
+                    </Button>
+                </Grid>
+            </StackPanel>
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="10,10,0,0"
+                HorizontalAlignment="Left"
+                FontSize="12"
+                FontWeight="Medium"
+                Text="Настройки паролей:"
+                Visibility="{Binding IsAdminLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <StackPanel
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="10,10,0,0"
+                Orientation="Horizontal"
+                Visibility="{Binding IsAdminLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <TextBlock
+                    Margin="0,3,0,0"
+                    HorizontalAlignment="Left"
+                    FontSize="12"
+                    FontWeight="Medium"
+                    Text="Минимальный размер пароля: " />
+                <TextBox
+                    Height="18"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    BorderBrush="DarkGray"
+                    BorderThickness="0,0,0,1"
+                    CaretBrush="LightGray"
+                    FontSize="12"
+                    FontWeight="Medium"
+                    Foreground="White"
+                    Text="{Binding PasswordMinSize, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel
+                Grid.Row="2"
+                Grid.Column="1"
+                Orientation="Horizontal"
+                Visibility="{Binding IsAdminLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="100" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="10,5,0,0"
+                        FontSize="12"
+                        Foreground="{StaticResource color0}"
+                        Text="{Binding StatusMessage}" />
+                    <Button
+                        x:Name="btnResetPassword"
+                        Grid.Column="1"
+                        Margin="0,0,0,0"
+                        HorizontalAlignment="Right"
+                        Command="{Binding PasswordMinSizeChangeCommand}"
+                        Content="Сменить"
+                        Cursor="Hand"
+                        FontSize="10">
+
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#0077b6" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#023e8a" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border
+                                    Width="50"
+                                    Height="20"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="10">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+
+                    </Button>
+                </Grid>
+            </StackPanel>
+            <StackPanel Grid.Row="3" Grid.Column="1">
+                <CheckBox
+                    Margin="10,5,0,0"
+                    Command="{Binding PasswordPresenceNumberCommand}"
+                    Content="Числа и символы в пароле"
+                    IsChecked="{Binding CheckBox}"
+                    Visibility="{Binding IsAdminLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            </StackPanel>
+
+        </Grid>
+    </StackPanel>
+
+</UserControl>

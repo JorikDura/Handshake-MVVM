@@ -1,0 +1,127 @@
+﻿<UserControl
+    x:Class="mvvm.Views.UserListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:components="clr-namespace:mvvm.Components"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:mvvm.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="_window"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <StackPanel
+        Width="500"
+        Margin="0,25,0,25"
+        Orientation="Vertical">
+        <TextBlock
+            HorizontalAlignment="Center"
+            FontSize="24"
+            FontWeight="Medium"
+            Text="Хендшейк" />
+        <TextBlock
+            Margin="0,5,0,0"
+            HorizontalAlignment="Center"
+            FontSize="12"
+            FontWeight="Medium"
+            Foreground="{StaticResource color0}"
+            Text="Жизнь - кусок пирога!"
+            TextWrapping="Wrap" />
+        <Button
+            HorizontalAlignment="Right"
+            Command="{Binding NavigateUserCreationCommand}"
+            Content="Добавить пользователя"
+            Cursor="Hand">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="{StaticResource color4}" />
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource color5}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border
+                        Width="150"
+                        Height="25"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="9">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <DataGrid
+            Height="340"
+            Margin="0,5,0,0"
+            AutoGenerateColumns="False"
+            CellStyle="{StaticResource DataGridCellStyle}"
+            ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+            ItemsSource="{Binding Users}"
+            RowStyle="{StaticResource DataGridRowStyle}"
+            Style="{StaticResource DataGridStyle}">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Width="50"
+                    Binding="{Binding Id, Mode=OneWay}"
+                    Header="ID" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Username, Mode=OneWay}"
+                    Header="Логин" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Name, Mode=OneWay}"
+                    Header="Имя" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding LastName, Mode=OneWay}"
+                    Header="Фамилия" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Phone, Mode=OneWay}"
+                    Header="Номер" />
+                <DataGridTemplateColumn Width="*" Header="Действия">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                Command="{Binding DataContext.DeleteUserCommand, ElementName=_window}"
+                                CommandParameter="{Binding}"
+                                Content="Бан"
+                                Cursor="Hand">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="#c9184a" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="{StaticResource color3}" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border
+                                            Width="auto"
+                                            Height="18"
+                                            Background="{TemplateBinding Background}"
+                                            CornerRadius="9">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+
+</UserControl>
