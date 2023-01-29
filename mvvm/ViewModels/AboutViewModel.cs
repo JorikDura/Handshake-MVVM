@@ -10,16 +10,6 @@ namespace mvvm.ViewModels
 {
     public class AboutViewModel : ViewModelBase
     {
-        private readonly UserStore _userStore;
-        private readonly SqlService _sqlService;
-        private readonly NavigationStore _aboutViewNavigationService;
 
-        public AboutViewModel(UserStore userStore, SqlService sqlService,
-            NavigationStore aboutViewNavigationService)
-        {
-            _userStore = userStore;
-            _sqlService = sqlService;
-            _aboutViewNavigationService = aboutViewNavigationService;
-        }
     }
 }

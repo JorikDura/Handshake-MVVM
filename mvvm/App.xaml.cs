@@ -59,7 +59,7 @@ namespace mvvm
         private INavigationService<AboutViewModel> CreateAboutNavigationModel()
         {
             return new LayoutNavigationService<AboutViewModel>(_navigationStore, 
-                () => new AboutViewModel(_userStore, _sqlService, _navigationStore),
+                () => new AboutViewModel(),
                 CreateNavigationBarViewModel);
         }
         private INavigationService<OptionsViewModel> CreateOptionsNavigationModel()
