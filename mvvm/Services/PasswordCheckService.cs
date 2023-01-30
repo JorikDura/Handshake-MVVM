@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace mvvm.Services
 {
-    public class PasswordCheck
+    public class PasswordCheckService
     {
         /// <summary>
         /// Проверяет пароль на наличие чисел и мат. символов

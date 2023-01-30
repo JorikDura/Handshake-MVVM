@@ -63,7 +63,7 @@ namespace mvvm.Commands
                 //проверка на символы в пароле
                 if (_sqlService.getIsPresence())
                 {
-                    if (PasswordCheck.checkPassword(networkCredential.Password))
+                    if (PasswordCheckService.checkPassword(networkCredential.Password))
                         this.Registration(networkCredential);
 
                     else

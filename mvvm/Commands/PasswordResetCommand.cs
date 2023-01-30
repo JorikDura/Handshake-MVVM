@@ -28,7 +28,7 @@ namespace mvvm.Commands
             NetworkCredential network = new NetworkCredential(null, _optionsViewModel.NewPassword);
             if(_sqlService.getIsPresence())
             {
-                if (PasswordCheck.checkPassword(network.Password))
+                if (PasswordCheckService.checkPassword(network.Password))
                 {
                     _sqlService.changePassword(_optionsViewModel.Id, new NetworkCredential(null, _optionsViewModel.NewPassword));
                     _optionsViewModel.PasswordStatus = "Успешно!";
