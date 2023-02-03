@@ -43,10 +43,23 @@ namespace mvvm.Commands
         }
         public override void Execute(object parameter)
         {
-            bool isValidUser = _sqlService.isAuthorized(new NetworkCredential(_loginViewModel.Username, _loginViewModel.Password));
+            NetworkCredential networkCredential = new NetworkCredential(_loginViewModel.Username, _loginViewModel.Password);
+
+            //шифруем пароль
+            try
+            {
+                PasswordCheckService.passwordEncrypt(ref networkCredential);
+            }
+            catch
+            {
+                _loginViewModel.ErrorMessage = "Неправильный логин или пароль";
+                return;
+            }
+
+            bool isValidUser = _sqlService.isAuthorized(networkCredential);
             if (isValidUser)
             {
-                UserModel userModel = _sqlService.getUserData(new NetworkCredential(_loginViewModel.Username, _loginViewModel.Password));
+                UserModel userModel = _sqlService.getUserData(networkCredential);
                 if(userModel.isBanned)
                 {
                     _loginViewModel.ErrorMessage = "Тебя забанили, друг";

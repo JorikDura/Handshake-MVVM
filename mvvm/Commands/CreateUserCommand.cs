@@ -45,9 +45,12 @@ namespace mvvm.Commands
             {
                 try
                 {
+                    NetworkCredential networkCredential = new NetworkCredential(_createUserViewModel.Username, _createUserViewModel.Password);
+                    //шифрование пароля
+                    PasswordCheckService.passwordEncrypt(ref networkCredential);
                     bool result = _sqlService.insertNewUser(
-                new NetworkCredential(_createUserViewModel.Username, _createUserViewModel.Password),
-                _createUserViewModel.Name, _createUserViewModel.LastName, _createUserViewModel.Phone);
+                        new NetworkCredential(_createUserViewModel.Username, _createUserViewModel.Password),
+                        _createUserViewModel.Name, _createUserViewModel.LastName, _createUserViewModel.Phone);
 
                     if (result)
                         _navigationService.Navigate();

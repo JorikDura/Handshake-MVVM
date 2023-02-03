@@ -3,16 +3,9 @@ using mvvm.Models;
 using mvvm.Services;
 using mvvm.Stores;
 using mvvm.ViewModels;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Net;
-using System.Security.Principal;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Navigation;
 
 namespace mvvm.Commands
 {
@@ -60,6 +53,18 @@ namespace mvvm.Commands
             {
                 NetworkCredential networkCredential = 
                     new NetworkCredential(_registrationViewModel.Username, _registrationViewModel.Password);
+                
+                //шифруем пароль
+                try
+                {
+                    PasswordCheckService.passwordEncrypt(ref networkCredential);
+                }
+                catch
+                {
+                    _registrationViewModel.ErrorMessage = "Что-то пошло не так.";
+                    return;
+                }
+
                 //проверка на символы в пароле
                 if (_sqlService.getIsPresence())
                 {
